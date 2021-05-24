@@ -1,0 +1,14 @@
+.logoescudo{
+    width: 20px;
+    height: auto;
+}
+
+.tablapartidos{
+    caption-side: top;
+}
+
+caption{
+    padding: 50px 0px 20px 0px;
+    font-size: 40px;
+    
+}
