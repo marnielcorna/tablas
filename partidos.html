@@ -36,9 +36,24 @@
     </nav>
 
     <div>
+        <h2>Encuentra a tu Equipo</h2>
+        <label for="nameEquipo">Equipo</label>
+        <input type="text" id="idEquipo" name="nameEquipo"/>
+        <button onclick="filtrar()">Buscar</button>
+    </div>
+
+    <div>
+        <label><input type="radio" id="radio_Ganados" name="tagEquipos"/>Ganados</label>
+        <label><input type="radio" id="radio_Perdidos" name="tagEquipos"/>Perdidos</label>
+        <label><input type="radio" id="radio_Empatados" name="tagEquipos"/>Empatados</label>
+        <label><input type="radio" id="radio_Todos" name="tagEquipos"/>Todos</label>
+    </div>
+
+
+    <div>
         <table class="table table-striped tablapartidos">
             
-            <caption>Partidos del la liga</caption>
+            <h2>Partidos del la liga</h2>
             <tbody id="table-body">
                 <thead>
                     <tr>

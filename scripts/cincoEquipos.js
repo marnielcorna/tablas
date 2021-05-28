@@ -16,14 +16,14 @@ function round(num, decimales = 2) {
 
 for (let i = 0; i < equipos.length; i++) {
   let name = equipos[i].team.name;
-  let idEquipo = equipos[i].team.id;
+  let idTeam = equipos[i].team.id;
   let equipoGoals = equipos[i].goalsFor;
   let partidosJugados = equipos[i].playedGames;
   let promedioGoles = equipoGoals / partidosJugados;
   let promedioRedondeado = round(promedioGoles);
   let infoEquipo = {
     nombre: name,
-    id: idEquipo, 
+    id: idTeam, 
     promedio: promedioRedondeado,
   };
   infoEquipos.push(infoEquipo);
@@ -35,7 +35,7 @@ infoEquipos.sort(function (a, b) {
 
  for(let i=0; i<5; i++){
     let row = document.createElement("tr");
-    row.innerHTML = `<td><img class="logo" src="https://crests.football-data.org/${infoEquipos[i].id}.svg"></td><td>${infoEquipos[i].nombre}</td><td>${infoEquipos[i].promedio}</td>`;
+    row.innerHTML = `<td class="tdTabla"><img class="logo" src="https://crests.football-data.org/${infoEquipos[i].id}.svg"></td><td class="tdTabla">${infoEquipos[i].nombre}</td><td class="tdTabla">${infoEquipos[i].promedio}</td>`;
     topFiltrados.appendChild(row);
  
 }
