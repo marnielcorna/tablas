@@ -1,39 +1,48 @@
-
 let valueEquipos = document.getElementById("tagEquipoId");
 let radioGanados = document.getElementById("radio_Ganados");
 let radioPerdidos = document.getElementById("radio_Perdidos");
 let radioEmpatados = document.getElementById("radio_Empatados");
 let elementosRadio = document.getElementsByClassName("elementosRadio");
-let infoPartidos = [];
-
-let partidos2020 = matches[0].matches;
+let matchesUrl = "https://api.football-data.org/v2/competitions/2014/matches";
 let tablebody = document.getElementById("table-body");
-
-// <----------------------------------------------------------------->
+let infoPartidos = [];
 
 let iniciar = () => {
   let equipo = valueEquipos.value;
-  let partidos = obtenerPartido(equipo);
-  let partidosObtenidos = filtrarPartidosObtenidos(partidos);
-  limpiarTabla();
-  if (partidosObtenidos == 0) {
-    pintarPartidos(partidos2020);
-  } else {
-    pintarPartidos(partidosObtenidos);
-  }
+  obtenerPartidos(equipo);
 };
 
-let obtenerPartido = (equipoElegido) => {
-  let partidosEquipo = [];
-  for (let i = 0; i < partidos2020.length; i++) {
-    if (
-      partidos2020[i].awayTeam.name == equipoElegido ||
-      partidos2020[i].homeTeam.name == equipoElegido
-    ) {
-      partidosEquipo.push(partidos2020[i]);
-    }
-  }
-  return partidosEquipo;
+let obtenerPartidos = (equipoElegido) => {
+  fetch(matchesUrl, {
+    method: "GET",
+    headers: { "X-Auth-Token": "737c29d8585841f4b4d20ee923d70304" },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      let partidos2020 = data.matches;
+
+      if (equipoElegido == undefined) {
+        pintarPartidos(partidos2020);
+        
+      } else {
+        let partidosEquipo = [];
+        for (let i = 0; i < partidos2020.length; i++) {
+          if (
+            partidos2020[i].awayTeam.name == equipoElegido ||
+            partidos2020[i].homeTeam.name == equipoElegido
+          ) {
+            partidosEquipo.push(partidos2020[i]);
+          }
+        }
+        let partidosObtenidos = filtrarPartidosObtenidos(partidosEquipo);
+        limpiarTabla();
+        if (partidosObtenidos == 0) {
+          pintarPartidos(partidos2020);
+        } else {
+          pintarPartidos(partidosObtenidos);
+        }
+      }
+    });
 };
 
 let filtrarPartidosObtenidos = (partidosSeleccionados) => {
@@ -49,6 +58,7 @@ let filtrarPartidosObtenidos = (partidosSeleccionados) => {
         partidosSeleccionados[i].awayTeam.name == valueEquipos.value)
     ) {
       equiposFiltrados.push(partidosSeleccionados[i]);
+      
     } else if (
       (radioPerdidos.checked == true &&
         partidosSeleccionados[i].score.winner == "HOME_TEAM" &&
@@ -58,7 +68,9 @@ let filtrarPartidosObtenidos = (partidosSeleccionados) => {
         partidosSeleccionados[i].awayTeam.name != valueEquipos.value)
     ) {
       equiposFiltrados.push(partidosSeleccionados[i]);
-    } else if (
+      
+    }
+    else if (
       (radioEmpatados.checked == true &&
         partidosSeleccionados[i].score.winner == "DRAW" &&
         partidosSeleccionados[i].homeTeam.name == valueEquipos.value) ||
@@ -67,7 +79,9 @@ let filtrarPartidosObtenidos = (partidosSeleccionados) => {
         partidosSeleccionados[i].awayTeam.name == valueEquipos.value)
     ) {
       equiposFiltrados.push(partidosSeleccionados[i]);
-    } else if (
+     
+    } 
+    else if (
       radioGanados.checked == false &&
       radioPerdidos.checked == false &&
       radioEmpatados.checked == false
@@ -95,6 +109,7 @@ let pintarPartidos = (arr) => {
     tablebody.appendChild(tr);
   }
 };
+
 // -----LIMPIAR -----
 let limpiarTabla = () => {
   valueEquipos.value = "";
@@ -103,4 +118,4 @@ let limpiarTabla = () => {
   }
   tablebody.innerHTML = "";
 };
-pintarPartidos(partidos2020);
+obtenerPartidos();

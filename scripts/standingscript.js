@@ -14,6 +14,7 @@ let funCargando = () => {
 let limpiarCargando = () => {
   textoCargando.innerHTML = "";
 };
+
 funCargando();
 
 fetch(rankingUrl, {
@@ -23,7 +24,7 @@ fetch(rankingUrl, {
   .then((response) => response.json())
   .then((data) => {
     let clasificacionT1 = data.standings[0].table;
-    limpiarCargando();
+    // limpiarCargando();
     for (let i = 0; i < clasificacionT1.length; i++) {
       let club = clasificacionT1[i].position;
       let escudo = clasificacionT1[i].team.crestUrl;

@@ -1,20 +1,17 @@
 let equipos = standings[0].standings[0].table;
 let topFiltrados = document.getElementById("table-filtros");
+let rankingUrl = "http://api.football-data.org/v2/competitions/2014/standings";
 let infoEquipos = [];
 
-function round(num, decimales = 2) {
-  var signo = num >= 0 ? 1 : -1;
-  num = num * signo;
-  if (decimales === 0) return signo * Math.round(num);
-  num = num.toString().split("e");
-  num = Math.round(
-    +(num[0] + "e" + (num[1] ? +num[1] + decimales : decimales))
-  );
-  num = num.toString().split("e");
-  return signo * (num[0] + "e" + (num[1] ? +num[1] - decimales : -decimales));
-}
+fetch(rankingUrl, {
+  method: "GET",
+  headers: { "X-Auth-Token": "737c29d8585841f4b4d20ee923d70304" },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    equipos = data.standings[0].table;
 
-for (let i = 0; i < equipos.length; i++) {
+  for (let i = 0; i < equipos.length; i++) {
   let name = equipos[i].team.name;
   let idTeam = equipos[i].team.id;
   let equipoGoals = equipos[i].goalsFor;
@@ -38,7 +35,23 @@ infoEquipos.sort(function (a, b) {
     row.innerHTML = `<td class="tdTabla"><img class="logo" src="https://crests.football-data.org/${infoEquipos[i].id}.svg"></td><td class="tdTabla">${infoEquipos[i].nombre}</td><td class="tdTabla">${infoEquipos[i].promedio}</td>`;
     topFiltrados.appendChild(row);
  
+}  
+  });
+
+
+function round(num, decimales = 2) {
+  var signo = num >= 0 ? 1 : -1;
+  num = num * signo;
+  if (decimales === 0) return signo * Math.round(num);
+  num = num.toString().split("e");
+  num = Math.round(
+    +(num[0] + "e" + (num[1] ? +num[1] + decimales : decimales))
+  );
+  num = num.toString().split("e");
+  return signo * (num[0] + "e" + (num[1] ? +num[1] - decimales : -decimales));
 }
+
+
 
 
 
