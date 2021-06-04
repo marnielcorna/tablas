@@ -7,6 +7,8 @@ let matchesUrl = "https://api.football-data.org/v2/competitions/2014/matches";
 let tablebody = document.getElementById("table-body");
 let infoPartidos = [];
 
+
+
 let iniciar = () => {
   let equipo = valueEquipos.value;
   obtenerPartidos(equipo);
@@ -36,6 +38,7 @@ let obtenerPartidos = (equipoElegido) => {
         }
         let partidosObtenidos = filtrarPartidosObtenidos(partidosEquipo);
         limpiarTabla();
+        
         if (partidosObtenidos == 0) {
           pintarPartidos(partidos2020);
         } else {
@@ -56,7 +59,9 @@ let filtrarPartidosObtenidos = (partidosSeleccionados) => {
       (radioGanados.checked == true &&
         partidosSeleccionados[i].score.winner == "AWAY_TEAM" &&
         partidosSeleccionados[i].awayTeam.name == valueEquipos.value)
-    ) {
+    ) 
+    
+    {
       equiposFiltrados.push(partidosSeleccionados[i]);
       
     } else if (
@@ -89,6 +94,7 @@ let filtrarPartidosObtenidos = (partidosSeleccionados) => {
       equiposFiltrados = partidosSeleccionados;
     }
   }
+  
   return equiposFiltrados;
 };
 
@@ -99,7 +105,7 @@ let pintarPartidos = (arr) => {
     let equipoLocal = arr[i].homeTeam.name;
     let scoreHome = arr[i].score.fullTime.homeTeam;
     let scoreAway = arr[i].score.fullTime.awayTeam;
-    let marcador = `${scoreHome} - ${scoreAway}`;
+    let marcador = `${scoreAway} - ${scoreHome}`;
     let winner = arr[i].score.winner;
     if (winner == null) {
       marcador = "Pendiente";
