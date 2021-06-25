@@ -12,7 +12,7 @@ Here is a a small Front-end project where I've used a public API using the data 
 Comming soon.
 
 ## How to clone
-• Simply, you have to clone direcly on your computer. 
+• Simply, you have to clone directly on your computer. 
 
 
 ## Installation
