@@ -8,8 +8,8 @@ Here is a a small Front-end project where I've used a public API using the data 
 • In "clasificacion" page you have the table of the "liga" updated in real time (Season 2021).
 • In "Estadisticas" you have a table for the Top 5 Goal average per match.
 
-## Demo
-If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://anabelisa.co/tips-para-hacer-un-buen-readme-md/)
+## Live Demo
+Comming soon.
 
 ## How to clone
 • Simply, you have to clone direcly on your computer. 
