@@ -9,7 +9,7 @@ Here is a a small Front-end project where I've used a public API using the data 
 • In "Estadisticas" you have a table for the Top 5 Goal average per match.
 
 ## Live Demo
-Comming soon.
+Coming soon.
 
 ## How to clone
 • Simply, you have to clone directly on your computer. 
